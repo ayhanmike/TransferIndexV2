@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
-  <link href="css/scss/bootstrap.css" rel="stylesheet" />
+    <link href="css/scss/bootstrap.css" rel="stylesheet" />
+    <link href="css/air-datepicker.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
 </head>
 
@@ -52,16 +53,21 @@
                 </svg>
               </div>
               <div class="search-item">
-                <input type="text" class="form-control form-control-sm search-input" placeholder="Pickup location" />
+                <input type="text" class="form-control form-control-sm search-input" placeholder="Pickup" />
+                <div class="badges">
+                  <div class="badge active">Airport</div>
+                  <div class="badge">Hotel</div>
+                  <div class="badge">Location</div>
+                </div>
               </div>
 
-              <button class="btn btn-primary btn-reverse-location">
+              <!-- <button class="btn btn-primary btn-reverse-location">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M5 11.9998C5 12.265 5.10535 12.5194 5.29289 12.7069C5.48043 12.8944 5.73478 12.9998 6 12.9998C6.26521 12.9998 6.51957 12.8944 6.7071 12.7069C6.89464 12.5194 7 12.265 7 11.9998V6.41379L8.293 7.70679C8.4816 7.88894 8.7342 7.98974 8.9964 7.98746C9.25859 7.98518 9.50941 7.88001 9.69481 7.6946C9.88022 7.5092 9.98539 7.25838 9.98767 6.99619C9.98995 6.73399 9.88915 6.48139 9.707 6.29279L6.707 3.29279C6.51947 3.10532 6.26516 3 6 3C5.73483 3 5.48052 3.10532 5.293 3.29279L2.293 6.29279C2.11084 6.48139 2.01004 6.73399 2.01232 6.99619C2.0146 7.25838 2.11977 7.5092 2.30518 7.6946C2.49058 7.88001 2.7414 7.98518 3.00359 7.98746C3.26579 7.98974 3.51839 7.88894 3.707 7.70679L5 6.41379V11.9998ZM15 7.99979C15 7.73457 14.8946 7.48022 14.7071 7.29268C14.5196 7.10514 14.2652 6.99979 14 6.99979C13.7348 6.99979 13.4804 7.10514 13.2929 7.29268C13.1054 7.48022 13 7.73457 13 7.99979V13.5858L11.707 12.2928C11.5184 12.1106 11.2658 12.0098 11.0036 12.0121C10.7414 12.0144 10.4906 12.1196 10.3052 12.305C10.1198 12.4904 10.0146 12.7412 10.0123 13.0034C10.01 13.2656 10.1108 13.5182 10.293 13.7068L13.293 16.7068C13.4805 16.8943 13.7348 16.9996 14 16.9996C14.2652 16.9996 14.5195 16.8943 14.707 16.7068L17.707 13.7068C17.8892 13.5182 17.9899 13.2656 17.9877 13.0034C17.9854 12.7412 17.8802 12.4904 17.6948 12.305C17.5094 12.1196 17.2586 12.0144 16.9964 12.0121C16.7342 12.0098 16.4816 12.1106 16.293 12.2928L15 13.5858V7.99979Z"
                     fill="#FFEFE5" />
                 </svg>
-              </button>
+              </button> -->
             </div>
 
             <!--Drop off location-->
@@ -74,13 +80,18 @@
                 </svg>
               </div>
               <div class="search-item">
-                <input type="text" class="form-control form-control-sm search-input" placeholder="Drop off location" />
+                <input type="text" class="form-control form-control-sm search-input" placeholder="Drop off" />
+                <div class="badges">
+                  <div class="badge">Airport</div>
+                  <div class="badge active">Hotel</div>
+                  <div class="badge">Location</div>
+                </div>
               </div>
             </div>
 
             <!--Pickup date-->
             <!--Round trip-->
-            <div data-route-type="RoundTrip" class="search-row" style="display: none;">
+            <div data-route-type="OneWay" class="search-row">
               <div class="search-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -88,16 +99,18 @@
                     fill="#B27F67" />
                 </svg>
               </div>
-              <div class="search-item with-label">
+              <div class="search-item" data-route="outbound">
                 <label for="Outbound">Outbound</label>
-                <input type="text" id="Outbound" class="form-control form-control-sm search-input"
-                  placeholder="Flight Arrival" />
+                <input type="text" id="Outbound" readonly class="air-outbound form-control form-control-sm search-input"
+                  placeholder="Pickup date" />
               </div>
-              <div class="search-item with-label">
+              <div class="search-item" data-route="return">
                 <label for="Return">Return</label>
-                <input type="text" id="Return" class="form-control form-control-sm search-input"
-                  placeholder="Flight Departure" />
+                <input type="text" id="Return" readonly class="air-return form-control form-control-sm search-input"
+                  placeholder="Pickup date" />
               </div>
+
+              <button class="btn-roundtrip btn btn-sm btn-outline-primary">Add return</button>
               <button class="btn-oneway btn btn-sm btn-light">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
@@ -108,7 +121,7 @@
             </div>
 
             <!--One way-->
-            <div data-route-type="OneWay" class="search-row">
+            <!-- <div data-route-type="OneWay" class="search-row">
               <div class="search-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -117,11 +130,11 @@
                 </svg>
               </div>
               <div class="search-item">
-                <input type="text" class="form-control form-control-sm search-input" placeholder="Pickup date" />
+                <input type="text" class="air-outbound form-control form-control-sm search-input" placeholder="Pickup date" />
               </div>
 
               <button class="btn-roundtrip btn btn-sm btn-outline-primary">Add return</button>
-            </div>
+            </div> -->
 
             <!--Passenger-->
             <div class="search-row">
@@ -303,13 +316,16 @@
     </div>
   </div>
 
+  <div id="air"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="js/default.js"></script>
+    <script src="js/air-datepicker.js"></script>
+    <script src="js/default.js"></script>
 </body>
 
 </html>

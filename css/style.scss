@@ -31,7 +31,7 @@ header {
 }
 
 .hero {
-  background: url("../img/hero-bg.png") bottom center  no-repeat;
+  background: url("../img/hero-bg.png") bottom center no-repeat;
   background-size: cover;
 
 
@@ -156,7 +156,7 @@ header {
   position: relative;
   z-index: 9;
   display: flex;
-  width: 420px;
+  width: 450px;
   padding: 30px;
   gap: 8px;
   flex-direction: column;
@@ -190,7 +190,7 @@ header {
       background-color: #FFFFFF;
       border-radius: 999px;
       padding-left: 48px;
-      padding-right: 20px;
+      padding-right: 8px;
       height: 48px;
       gap: 4px;
 
@@ -212,8 +212,50 @@ header {
       }
 
       .btn-oneway {
-        margin-right: -8px;
         background-color: #FFFFFF;
+      }
+
+      &[data-route-type="OneWay"] {
+        [data-route="return"] {
+          display: none;
+        }
+        .btn-oneway {
+          display: none;
+        }
+        .search-input {
+          border-top-right-radius: 18px;
+          border-bottom-right-radius: 18px;
+        }        
+      }
+      &[data-route-type="RoundTrip"] {
+        [data-route="outbound"] {
+          &::placeholder {
+            content: "Flight arrival";
+          }
+        }
+        .btn-roundtrip {
+          display: none;
+        }
+        .search-item {
+          position: relative;
+
+          label {
+            display: block;
+            position: absolute;
+            left: 8px;
+            top: 2px;
+            color: var(--brown-400, #B27F67);
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 12px;
+          }
+    
+          .search-input {
+            padding-top: 12px;
+            padding-bottom: 0;
+          }          
+        }
       }
     }
 
@@ -233,6 +275,11 @@ header {
 
   .search-item {
     width: 100%;
+    position: relative;
+
+    label {
+      display: none;
+    }
 
     .search-input {
       height: 36px;
@@ -242,26 +289,6 @@ header {
       &::placeholder {
         color: #55382b;
         font-weight: normal;
-      }
-    }
-
-    &.with-label {
-      position: relative;
-
-      label {
-        position: absolute;
-        left: 8px;
-        top: 2px;
-        color: var(--brown-400, #B27F67);
-        font-size: 10px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 12px;
-      }
-
-      .search-input {
-        padding-top: 12px;
-        padding-bottom: 0;
       }
     }
 
@@ -281,6 +308,36 @@ header {
 
     [data-count="0"] {
       display: none;
+    }
+
+    .badges {
+      display: flex;
+      position: absolute;
+      right: 8px;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      align-items: center;
+      gap: 4px;
+
+      .badge {
+        font-size: 11px;
+        font-weight: 600;
+        background: var(--brown-50, #F6F1EE);
+        color: var(--brown-500, #98664D);
+
+        &.active {
+          font-size: 12px;
+          background: var(--brown-100, #E5D4CC);
+          color: var(--brown-700, #55382B);
+        }
+      }
+
+      &:has(.active) {
+        .badge:not(.active) {
+          display: none;
+        }
+      }
     }
   }
 
