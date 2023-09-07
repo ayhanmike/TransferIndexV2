@@ -291,7 +291,7 @@ header .header-actions .btn {
 .search .search-item .badges[data-type="1"] .badge:not([data-type="1"]) {
   display: none;
 }
-.search .search-item .badges[data-type="2"] .badge:not([data-type="2"]) {
+.search .search-item .badges[data-type="7"] .badge:not([data-type="7"]) {
   display: none;
 }
 .search .search-item .badges[data-type="8"] .badge:not([data-type="8"]) {
@@ -405,7 +405,7 @@ header .header-actions .btn {
   overflow-y: scroll;
   box-sizing: border-box;
   left: -48px;
-  right: 0;
+  right: -8px;
   margin: 0.5rem 0 0 0;
   padding: 0;
   z-index: 2;
