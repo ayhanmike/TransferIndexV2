@@ -187,6 +187,7 @@ header .header-actions .btn {
   position: absolute;
   right: 12px;
   margin: auto;
+  font-size: 13px;
 }
 .search .search-inner .search-row .btn-oneway {
   background-color: #FFFFFF;
@@ -196,10 +197,6 @@ header .header-actions .btn {
 }
 .search .search-inner .search-row[data-route-type=OneWay] .btn-oneway {
   display: none;
-}
-.search .search-inner .search-row[data-route-type=OneWay] .search-input {
-  border-top-right-radius: 18px;
-  border-bottom-right-radius: 18px;
 }
 .search .search-inner .search-row[data-route-type=RoundTrip] [data-route=outbound]::-moz-placeholder {
   content: "Flight arrival";
@@ -228,17 +225,9 @@ header .header-actions .btn {
   padding-top: 12px;
   padding-bottom: 0;
 }
-.search .search-inner .btn-reverse-location {
-  position: absolute;
-  z-index: 1;
-  right: 12px;
-  bottom: -24px;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.search .search-inner .search-row:not([data-route-type=RoundTrip]) .search-input {
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
 }
 .search .search-item {
   width: 100%;
@@ -251,6 +240,8 @@ header .header-actions .btn {
   height: 36px;
   border: 0;
   font-weight: bold;
+  font-size: 13px;
+  letter-spacing: -0.5px;
 }
 .search .search-item .search-input::-moz-placeholder {
   color: #55382b;
@@ -271,6 +262,7 @@ header .header-actions .btn {
   flex: 1;
   font-weight: normal;
   text-align: left;
+  font-size: 13px;
 }
 .search .search-item [data-count="0"] {
   display: none;
@@ -286,17 +278,23 @@ header .header-actions .btn {
   gap: 4px;
 }
 .search .search-item .badges .badge {
-  font-size: 11px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 600;
   background: var(--brown-50, #F6F1EE);
   color: var(--brown-500, #98664D);
 }
-.search .search-item .badges .badge.active {
-  font-size: 12px;
-  background: var(--brown-100, #E5D4CC);
-  color: var(--brown-700, #55382B);
+.search .search-item .badges[data-type="1"] .badge:not([data-type="1"]) {
+  display: none;
 }
-.search .search-item .badges:has(.active) .badge:not(.active) {
+.search .search-item .badges[data-type="2"] .badge:not([data-type="2"]) {
+  display: none;
+}
+.search .search-item .badges[data-type="8"] .badge:not([data-type="8"]) {
   display: none;
 }
 .search .search-pax-wrapper {
@@ -393,4 +391,86 @@ header .header-actions .btn {
 
 .btn {
   border-radius: 999px;
+}
+
+.autoComplete_wrapper {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+.autoComplete_wrapper > ul {
+  position: absolute;
+  max-height: 226px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  left: -48px;
+  right: 0;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+  z-index: 2;
+  list-style: none;
+  border-radius: 0.6rem;
+  background-color: #fff;
+  border: 1px solid rgba(33, 33, 33, 0.07);
+  box-shadow: 0 3px 6px rgba(149, 157, 165, 0.15);
+  outline: 0;
+  transition: opacity 0.15s ease-in-out;
+  -moz-transition: opacity 0.15s ease-in-out;
+  -webkit-transition: opacity 0.15s ease-in-out;
+}
+
+.autoComplete_wrapper > ul:empty,
+.autoComplete_wrapper > ul[hidden] {
+  display: block;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.autoComplete_wrapper > ul > li {
+  margin: 0;
+  padding: 8px 16px;
+  text-align: left;
+  font-size: 12px;
+  color: #55382B;
+  background-color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+.autoComplete_wrapper > ul > li .rs-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.autoComplete_wrapper > ul > li .rs-item svg {
+  width: 20px;
+  height: 20px;
+}
+.autoComplete_wrapper > ul > li .rs-item strong {
+  display: block;
+}
+.autoComplete_wrapper > ul > li .rs-item small {
+  font-size: 11px;
+}
+
+.autoComplete_wrapper > ul > li mark {
+  color: #E65600;
+  font-weight: 700;
+}
+
+.autoComplete_wrapper > ul > li:hover {
+  cursor: pointer;
+  background: var(--brown-50, #F6F1EE);
+}
+
+.autoComplete_wrapper > ul > li[aria-selected=true] {
+  background: var(--brown-50, #F6F1EE);
+}
+
+@media only screen and (max-width: 600px) {
+  .autoComplete_wrapper > input {
+    width: 18rem;
+  }
 }/*# sourceMappingURL=style.css.map */
