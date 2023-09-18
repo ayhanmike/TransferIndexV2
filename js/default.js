@@ -1,14 +1,24 @@
-$(document).ready(function () {
-  $(".pax-toggle").click(function () {
-    var pax = $(this).find("[data-pax]").data("pax");
-    $(".search-pax-wrapper").toggle();
-    $(".stepper[data-type='" + pax + "']").trigger("focus");
-  });
+const DestinationTypes = Object.freeze({
+  airport: 1,
+  location: 7,
+  hotel: 8,
+  all: [1, 7, 8]
 });
 
-var global = (function () {
+const AvailableDestinationTypes = Object.freeze({
+  pickup: {
+    oneway: DestinationTypes.all,
+    roundtrip: [DestinationTypes.airport]
+  },
+  dropoff: {
+    oneway: DestinationTypes.all,
+    roundtrip: [DestinationTypes.location, DestinationTypes.hotel]
+  }
+});
 
-  var isMobile = function () {
+const global = (function () {
+
+  const isMobile = function () {
     const toMatch = [
       /Android/i,
       /webOS/i,
@@ -30,9 +40,26 @@ var global = (function () {
 
 })();
 
-var search = (function () {
-  var searchVars = {
+const search = (function () {
+  let searchVars = {
     $el: $("#search"),
+    destination: {
+      pickup: {
+        input: $("#pickup"),
+        value: undefined,
+      },
+      dropoff: {
+        input: $("#dropoff"),
+        value: undefined,
+      },
+      all: $("#pickup, #dropoff"),
+      badges: {
+        pickup: $("#badgesPickup .badge"),
+        dropoff: $("#badgesDropoff .badge"),
+        all: $("#badgesPickup .badge, #badgesDropoff .badge")
+      },
+      remove: $(".btn-destination-remove")
+    },
     routeType: "OneWay",
     pax: {
       adult: {
@@ -53,20 +80,221 @@ var search = (function () {
     }
   }
 
-  var init = function () {
+  const init = function () {
     _bindEvents();
   };
 
-  var _bindEvents = function () {
+  const _bindEvents = function () {
+    destination.init();
     dates.init();
-    stepper.init();
+    pax.init();
   };
 
-  var pax = function () {
-    return searchVars.pax;
-  }
+  const destination = (function () {
 
-  var dates = (function () {
+    const _setBadges = function () {
+      searchVars.destination.badges.all.removeClass("available selected");
+
+      searchVars.destination.all.map(function () {
+        let id = $(this).attr("id");
+        let idx = (id == "pickup") ? "dropoff" : "pickup";
+        let value = searchVars.destination[id].value;
+        let valuex = searchVars.destination[idx].value;
+
+        let available = AvailableDestinationTypes[id][searchVars.routeType.toLowerCase()];
+
+        let relAvailable = (valuex == undefined)
+          ? available
+          : (valuex.t == DestinationTypes.airport)
+            ? [DestinationTypes.hotel, DestinationTypes.location]
+            : [DestinationTypes.airport];
+
+        if (searchVars.destination[id].value != undefined)
+          if (!available.includes(searchVars.destination[id].value?.t)) {
+            searchVars.destination[id].input.val("").blur();
+            return false;
+          }
+
+        searchVars.destination.badges[id].map(function () {
+          let badge = $(this);
+          if (badge.data("type") == value?.t) badge.addClass("selected");
+          relAvailable.forEach((type) => {
+            if (badge.data("type") == type) badge.addClass("available");
+          });
+        });
+      });
+
+      _checkBadges();
+    }
+
+    const _checkBadges = function () {
+
+      //alert("check badges / improve setbadges")
+    }
+
+    const _displayHTML = function (value) {
+      let html;
+      let type = value?.t || 0;
+
+      switch (type) {
+        case DestinationTypes.airport: //Airport
+          html = {
+            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.22 7.36678C9.4332 7.92534 8.89699 8.77035 8.72668 9.72012L7.70001 7.75345L5.10668 10.3335L5.33334 12.0001L4.63334 12.7068L3.45334 10.5801L1.33334 9.40678L2.04001 8.70012L3.69334 8.93345L6.28668 6.33345L1.33334 3.74678L2.27334 2.80678L8.40668 4.22012L11 1.62678C11.0924 1.53326 11.2024 1.459 11.3237 1.40832C11.4451 1.35764 11.5752 1.33154 11.7067 1.33154C11.8381 1.33154 11.9683 1.35764 12.0896 1.40832C12.2109 1.459 12.321 1.53326 12.4133 1.62678C12.8 2.02012 12.8 2.66678 12.4133 3.04012L9.82001 5.63345L10.22 7.36678ZM14.6667 10.3335C14.6667 12.0668 12.3333 14.6668 12.3333 14.6668C12.3333 14.6668 10 12.0668 10 10.3335C10 9.06678 11.0667 8.00012 12.3333 8.00012C13.6 8.00012 14.6667 9.06678 14.6667 10.3335ZM13.1333 10.4001C13.1333 10.0001 12.7333 9.60012 12.3333 9.60012C11.9333 9.60012 11.5333 9.93345 11.5333 10.4001C11.5333 10.8001 11.8667 11.2001 12.3333 11.2001C12.8 11.2001 13.2 10.8001 13.1333 10.4001Z" fill="#B27F67"/>
+            </svg>`,
+            title: `${value.d} (${value.n})`,
+            subtitle: value.d.split(" - ")[1] || "",
+          }
+
+          break;
+        case DestinationTypes.location: //Location
+          html = {
+            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.99999 7.99967C8.36666 7.99967 8.68066 7.86901 8.94199 7.60767C9.20288 7.34679 9.33332 7.03301 9.33332 6.66634C9.33332 6.29967 9.20288 5.98567 8.94199 5.72434C8.68066 5.46345 8.36666 5.33301 7.99999 5.33301C7.63332 5.33301 7.31955 5.46345 7.05866 5.72434C6.79732 5.98567 6.66666 6.29967 6.66666 6.66634C6.66666 7.03301 6.79732 7.34679 7.05866 7.60767C7.31955 7.86901 7.63332 7.99967 7.99999 7.99967ZM7.99999 14.6663C6.2111 13.1441 4.8751 11.7301 3.99199 10.4243C3.10843 9.11901 2.66666 7.91079 2.66666 6.79967C2.66666 5.13301 3.20288 3.80523 4.27532 2.81634C5.34732 1.82745 6.58888 1.33301 7.99999 1.33301C9.4111 1.33301 10.6527 1.82745 11.7247 2.81634C12.7971 3.80523 13.3333 5.13301 13.3333 6.79967C13.3333 7.91079 12.8918 9.11901 12.0087 10.4243C11.1251 11.7301 9.78888 13.1441 7.99999 14.6663Z" fill="#B27F67"/>
+          </svg>`,
+            title: value.n,
+            subtitle: value.d,
+          }
+
+          break;
+        case DestinationTypes.hotel: //Hotel
+          html = {
+            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.3333 12.6667H12.6667V7.33333H8.66668V12.6667H10V8.66667H11.3333V12.6667ZM2.00001 12.6667V2.66667C2.00001 2.48986 2.07025 2.32029 2.19527 2.19526C2.3203 2.07024 2.48987 2 2.66668 2H12C12.1768 2 12.3464 2.07024 12.4714 2.19526C12.5964 2.32029 12.6667 2.48986 12.6667 2.66667V6H14V12.6667H14.6667V14H1.33334V12.6667H2.00001ZM4.66668 7.33333V8.66667H6.00001V7.33333H4.66668ZM4.66668 10V11.3333H6.00001V10H4.66668ZM4.66668 4.66667V6H6.00001V4.66667H4.66668Z" fill="#B27F67"/>
+          </svg>`,
+            title: value.n,
+            subtitle: value.d,
+          }
+
+          break;
+
+        default:
+          html = {
+            icon: "",
+            title: "",
+            subtitle: "",
+          }
+          break;
+      }
+
+      return html
+    }
+
+    const _resultItem = function (item, data) {
+      let html = _displayHTML(data.value);
+      $(item).html(`<div class="rs-item"><div>${html.icon}</div><div><strong>${html.title}</strong><small>${html.subtitle}</small></div></div>`);
+    }
+
+    const _selection = function (input, value) {
+      let id = input.attr("id");
+
+      searchVars.destination[id].value = value;
+      input.val(_displayHTML(value).title);
+      _setBadges();
+    }
+
+    const _autoComplete = function (el) {
+      el = new autoComplete({
+        selector: "#" + el.attr("id"),
+        data: {
+          src: async (query) => {
+            try {
+              const source = await fetch(`js/LocationList_TR.json`);
+              const data = await source.json();
+
+              return data;
+            } catch (error) {
+              return error;
+            }
+          },
+          filter: (data) => {
+            let id = $(el.input).attr("id");
+            let idx = (id == "pickup") ? "dropoff" : "pickup";
+            let valuex = searchVars.destination[idx].value;
+
+            if (valuex) {
+              data = data.filter((item) => {
+                if (valuex.t == DestinationTypes.airport) {
+                  return item.value.a.toString().split(",").includes(valuex.i.toString() || "0")
+                } else {
+                  return valuex.a.includes(item.value.i.toString() || "0")
+                }
+              });
+            } else if (searchVars.routeType == "RoundTrip") {
+              data = data.filter((item) => {
+                if (id == "pickup") {
+                  return item.value.t == DestinationTypes.airport
+                } else {
+                  return item.value.t != DestinationTypes.airport
+                }
+              });              
+            }
+
+            return data;
+          },
+          cache: true,
+          keys: ["d", "n", "s"]
+        },
+        threshold: 3,
+        resultsList: {
+          tag: "ul",
+          id: "autoComplete_list",
+          class: "results_list",
+          destination: "#" + el.attr("id"),
+          position: "afterend",
+          maxResults: 99,
+          noResults: true,
+        },
+        resultItem: {
+          tag: "li",
+          class: "autoComplete_result",
+          element: (item, data) => {
+            _resultItem(item, data);
+          }
+        },
+        events: {
+          input: {
+            focus() {
+              if (el.input.value.length) {
+                el.start();
+              }
+            },
+            selection(event) {
+              _selection($(el.input), event.detail.selection.value)
+            },
+          },
+        },
+      });
+    }
+
+    const init = function () {
+      _bindEvents();
+    }
+
+    const _bindEvents = function () {
+      searchVars.destination.all.on("focus", function () {
+        $(this).select();
+      });
+
+      searchVars.destination.all.on("keyup, blur", function () {
+        if ($(this).val() == "") _selection($(this), undefined);
+      });
+
+      searchVars.destination.remove.click(function () {
+        _selection($(this).closest(".search-item").find(".search-input"), undefined);
+      });
+
+      _autoComplete(searchVars.destination.pickup.input);
+      _autoComplete(searchVars.destination.dropoff.input);
+    }
+
+    return {
+      init: init,
+      setBadges: _setBadges
+    };
+  })();
+
+  const dates = (function () {
     let lang = "tr";
     let locale = {
       tr: {
@@ -97,7 +325,11 @@ var search = (function () {
       }
     }
 
-    let dp = {
+    let dateVars = {
+      $el: {
+        outbound: $("#outbound"),
+        return: $("#return")
+      },
       outbound: {},
       return: {},
       options: {
@@ -108,61 +340,65 @@ var search = (function () {
         minutesStep: 1,
         timepicker: true,
         minDate: new Date(),
-        isMobile: global.isMobile()
+        isMobile: true //global.isMobile()
       },
     }
 
-    var init = function () {
+    const init = function () {
       _bindEvents();
     }
 
-    var _bindEvents = function () {
-      routeType(searchVars.routeType);
-      routeSwitcher();
-      runDatepicker();
+    const _bindEvents = function () {
+      _setRouteType(searchVars.routeType);
+      _switchRoute();
+      _datepicker();
     }
 
-    var routeType = function (route) {
+    const _setRouteType = function (route) {
+      searchVars.routeType = route;
       $("[data-route-type]").attr("data-route-type", route);
+      dateVars.$el.outbound.attr("placeholder", dateVars.$el.outbound.data("placeholder-" + route.toLowerCase()));
+
+      destination.setBadges();
     }
 
-    var routeSwitcher = function () {
+    const _switchRoute = function () {
       $(".btn-roundtrip").click(function () {
-        if (dp.outbound.visible) dp.outbound.hide();
-        dp.return.clear();
-        routeType("RoundTrip");
+        if (dateVars.outbound.selectedDates?.length) {
+          dateVars.return.show();
+        }
+
+        _setRouteType("RoundTrip");
       });
       $(".btn-oneway").click(function () {
-        if (dp.outbound.visible) dp.outbound.hide();
-        dp.return.clear();
-        dp.return.hide();
-        routeType("OneWay");
+
+        _setRouteType("OneWay");
       });
     }
 
-    var runDatepicker = function () {
-      dp.outbound = new AirDatepicker('.air-outbound', {
-        ...dp.options,
+    const _datepicker = function () {
+      dateVars.outbound = new AirDatepicker('#outbound', {
+        ...dateVars.options,
         ...{
           buttons: ['clear', {
             content: locale[lang].done,
             onClick: (el) => {
               el.hide();
               if ($(".air-return").is(":visible"))
-                dp.return.show();
+                dateVars.return.show();
             }
           }],
           onSelect: ({ date }) => {
-            dp.return.update({
+            dateVars.return.update({
               minDate: date
             });
-            dp.return.clear();
+            dateVars.return.clear();
           },
         }
       });
 
-      dp.return = new AirDatepicker('.air-return', {
-        ...dp.options,
+      dateVars.return = new AirDatepicker('#return', {
+        ...dateVars.options,
         ...{
           buttons: ['clear', {
             content: locale[lang].done,
@@ -179,47 +415,56 @@ var search = (function () {
     };
   })();
 
-  var stepper = (function () {
-    var stepperVars = {
+  const pax = (function () {
+    let paxVars = {
       $el: $(".stepper")
     }
 
-    var init = function () {
-      render(searchVars.pax);
+    const init = function () {
+      _render(searchVars.pax);
       _bindEvents();
     }
 
-    var _bindEvents = function () {
-      step();
-      onClick();
-      onKeypress();
+    const _bindEvents = function () {
+      _toggle();
+      _step();
+      _onClick();
+      _onKeypress();
     }
 
-    var step = function (step, type) {
+    const _toggle = function () {
+      $(".pax-toggle").click(function () {
+        let type = $(this).find("[data-pax]").data("pax");
+        $(".search-pax-wrapper").toggle();
+        $(".stepper[data-type='" + type + "']").trigger("focus");
+      });
+    }
+
+    const _step = function (step, type) {
       if (step == "up") {
         if (searchVars.pax[type].value < searchVars.pax[type].max) searchVars.pax[type].value++;
       } else if (step == "down") {
         if (searchVars.pax[type].value > searchVars.pax[type].min) searchVars.pax[type].value--;
       }
-      render(searchVars.pax);
+      _render(searchVars.pax);
     }
 
-    var onClick = function () {
-      stepperVars.$el.find(".btn").click(function () {
-        var btn = $(this);
-        step(btn.data("step"), btn.closest(".stepper").data("type"));
+    const _onClick = function () {
+      paxVars.$el.find(".btn").click(function () {
+        let btn = $(this);
+        _step(btn.data("step"), btn.closest(".stepper").data("type"));
       });
     }
 
-    var onKeypress = function () {
-      stepperVars.$el.keydown(function (event) {
-        var key = event.keyCode;
-        if (key == 38 || key == 39) step("up", $(this).data("type"));
-        if (key == 37 || key == 40) step("down", $(this).data("type"));
+    const _onKeypress = function () {
+      paxVars.$el.keydown(function (event) {
+        let key = event.keyCode;
+        if (key == 38 || key == 39) _step("up", $(this).data("type"));
+        if (key == 37 || key == 40) _step("down", $(this).data("type"));
       });
     }
 
-    var render = function (pax) {
+    const _render = function (pax) {
       Object.entries(pax).forEach(([key, value]) => {
         searchVars.$el.find("[data-pax=" + key + "]").attr("data-count", value.value).text(value.value);
       });
@@ -227,143 +472,14 @@ var search = (function () {
 
     return {
       init: init,
-      render: function (pax) {
-        return render(pax)
-      }
     };
   })();
 
   return {
     init: init,
-    stepper: stepper,
-    pax: pax,
   };
 })();
 
 $(function () {
   search.init();
-
-
-
-
-
-  var autocomplete = function () {
-    const Types = Object.freeze({
-      airport: 1,
-      location: 7,
-      hotel: 8,
-    })
-
-    var _displayHTML = function (data) {
-      let html;
-
-      switch (data.value.t) {
-        case Types.airport: //Airport
-          html = {
-            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10.22 7.36678C9.4332 7.92534 8.89699 8.77035 8.72668 9.72012L7.70001 7.75345L5.10668 10.3335L5.33334 12.0001L4.63334 12.7068L3.45334 10.5801L1.33334 9.40678L2.04001 8.70012L3.69334 8.93345L6.28668 6.33345L1.33334 3.74678L2.27334 2.80678L8.40668 4.22012L11 1.62678C11.0924 1.53326 11.2024 1.459 11.3237 1.40832C11.4451 1.35764 11.5752 1.33154 11.7067 1.33154C11.8381 1.33154 11.9683 1.35764 12.0896 1.40832C12.2109 1.459 12.321 1.53326 12.4133 1.62678C12.8 2.02012 12.8 2.66678 12.4133 3.04012L9.82001 5.63345L10.22 7.36678ZM14.6667 10.3335C14.6667 12.0668 12.3333 14.6668 12.3333 14.6668C12.3333 14.6668 10 12.0668 10 10.3335C10 9.06678 11.0667 8.00012 12.3333 8.00012C13.6 8.00012 14.6667 9.06678 14.6667 10.3335ZM13.1333 10.4001C13.1333 10.0001 12.7333 9.60012 12.3333 9.60012C11.9333 9.60012 11.5333 9.93345 11.5333 10.4001C11.5333 10.8001 11.8667 11.2001 12.3333 11.2001C12.8 11.2001 13.2 10.8001 13.1333 10.4001Z" fill="#B27F67"/>
-            </svg>`,
-            title: `${data.value.d} (${data.value.n})`,
-            subtitle: data.value.d.split(" - ")[1] || "",
-          }
-
-          break;
-        case Types.location: //Location
-          html = {
-            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7.99999 7.99967C8.36666 7.99967 8.68066 7.86901 8.94199 7.60767C9.20288 7.34679 9.33332 7.03301 9.33332 6.66634C9.33332 6.29967 9.20288 5.98567 8.94199 5.72434C8.68066 5.46345 8.36666 5.33301 7.99999 5.33301C7.63332 5.33301 7.31955 5.46345 7.05866 5.72434C6.79732 5.98567 6.66666 6.29967 6.66666 6.66634C6.66666 7.03301 6.79732 7.34679 7.05866 7.60767C7.31955 7.86901 7.63332 7.99967 7.99999 7.99967ZM7.99999 14.6663C6.2111 13.1441 4.8751 11.7301 3.99199 10.4243C3.10843 9.11901 2.66666 7.91079 2.66666 6.79967C2.66666 5.13301 3.20288 3.80523 4.27532 2.81634C5.34732 1.82745 6.58888 1.33301 7.99999 1.33301C9.4111 1.33301 10.6527 1.82745 11.7247 2.81634C12.7971 3.80523 13.3333 5.13301 13.3333 6.79967C13.3333 7.91079 12.8918 9.11901 12.0087 10.4243C11.1251 11.7301 9.78888 13.1441 7.99999 14.6663Z" fill="#B27F67"/>
-          </svg>`,
-            title: data.value.n,
-            subtitle: data.value.d,
-          }
-
-          break;
-        case Types.hotel: //Hotel
-          html = {
-            icon: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11.3333 12.6667H12.6667V7.33333H8.66668V12.6667H10V8.66667H11.3333V12.6667ZM2.00001 12.6667V2.66667C2.00001 2.48986 2.07025 2.32029 2.19527 2.19526C2.3203 2.07024 2.48987 2 2.66668 2H12C12.1768 2 12.3464 2.07024 12.4714 2.19526C12.5964 2.32029 12.6667 2.48986 12.6667 2.66667V6H14V12.6667H14.6667V14H1.33334V12.6667H2.00001ZM4.66668 7.33333V8.66667H6.00001V7.33333H4.66668ZM4.66668 10V11.3333H6.00001V10H4.66668ZM4.66668 4.66667V6H6.00001V4.66667H4.66668Z" fill="#B27F67"/>
-          </svg>`,
-            title: data.value.n,
-            subtitle: data.value.d,
-          }
-
-          break;
-
-        default:
-          html = {
-            icon: ``,
-            title: data.value.n,
-            subtitle: data.value.d,
-          }
-          break;
-      }
-
-
-      return html
-    }
-
-    var _resultItem = function (item, data) {
-      let html = _displayHTML(data);
-      $(item).html(`<div class="rs-item"><div>${html.icon}</div><div><strong>${html.title}</strong><small>${html.subtitle}</small></div></div>`);
-    }
-
-    var _autoComplete = function (el) {
-      el = new autoComplete({
-        selector: "#" + el,
-        data: {
-          src: async (query) => {
-            try {
-              // Fetch Data from external Source
-              const source = await fetch(`js/LocationList_TR.json`);
-              // Data should be an array of `Objects` or `Strings`
-              const data = await source.json();
-
-              return data;
-            } catch (error) {
-              return error;
-            }
-          },
-          cache: true,
-          keys: ["d", "n", "s"]
-        },
-        resultsList: {
-          tag: "ul",
-          id: "autoComplete_list",
-          class: "results_list",
-          destination: "#" + el,
-          position: "afterend",
-          maxResults: 99,
-          noResults: true,
-        },
-        resultItem: {
-          tag: "li",
-          class: "autoComplete_result",
-          element: (item, data) => {
-            _resultItem(item, data);
-          }
-        },
-        events: {
-          input: {
-            focus() {
-              if (el.input.value.length) {
-                el.start();
-              }
-              //$(el.input).closest(".search-item").find(".badges").hide();
-            },
-            selection(event) {
-              let selection = event.detail.selection;
-              el.input.value = _displayHTML(selection).title;
-              $(el.input).closest(".search-item").find(".badges").attr("data-type", selection.value.t).show()
-              el.input.blur();
-            },
-          },
-        },
-      });
-    }
-
-
-    _autoComplete("pickup");
-    _autoComplete("dropoff");
-  }
-  autocomplete();
 });
