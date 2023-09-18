@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <link href="css/scss/bootstrap.css" rel="stylesheet" />
-  <link href="css/air-datepicker.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
 </head>
 
@@ -53,29 +52,32 @@
                 </svg>
               </div>
               <div class="search-item">
+                <label for="pickup">Pickup</label>
                 <input type="text" id="pickup" class="form-control form-control-sm search-input" placeholder="Pickup" />
 
                 <div id="badgesPickup" class="badges">
                   <button class="btn-destination-remove btn btn-sm btn-light">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M7.10466 8.04701L3.33333 4.27567L4.27599 3.33301L8.04733 7.10434L11.8187 3.33301L12.7613 4.27567L8.99 8.04701L12.7613 11.8183L11.8187 12.761L8.04733 8.98967L4.27599 12.761L3.33333 11.8183L7.10466 8.04701Z" fill="#B27F67"></path>
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M7.10466 8.04701L3.33333 4.27567L4.27599 3.33301L8.04733 7.10434L11.8187 3.33301L12.7613 4.27567L8.99 8.04701L12.7613 11.8183L11.8187 12.761L8.04733 8.98967L4.27599 12.761L3.33333 11.8183L7.10466 8.04701Z"
+                        fill="#B27F67"></path>
                     </svg>
                   </button>
-                  <div class="badge available" data-type="1">
+                  <div class="badge available" data-type="1" data-bs-toggle="tooltip" data-bs-title="Airport">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M10.22 7.36678C9.4332 7.92534 8.89699 8.77035 8.72668 9.72012L7.70001 7.75345L5.10668 10.3335L5.33334 12.0001L4.63334 12.7068L3.45334 10.5801L1.33334 9.40678L2.04001 8.70012L3.69334 8.93345L6.28668 6.33345L1.33334 3.74678L2.27334 2.80678L8.40668 4.22012L11 1.62678C11.0924 1.53326 11.2024 1.459 11.3237 1.40832C11.4451 1.35764 11.5752 1.33154 11.7067 1.33154C11.8381 1.33154 11.9683 1.35764 12.0896 1.40832C12.2109 1.459 12.321 1.53326 12.4133 1.62678C12.8 2.02012 12.8 2.66678 12.4133 3.04012L9.82001 5.63345L10.22 7.36678ZM14.6667 10.3335C14.6667 12.0668 12.3333 14.6668 12.3333 14.6668C12.3333 14.6668 10 12.0668 10 10.3335C10 9.06678 11.0667 8.00012 12.3333 8.00012C13.6 8.00012 14.6667 9.06678 14.6667 10.3335ZM13.1333 10.4001C13.1333 10.0001 12.7333 9.60012 12.3333 9.60012C11.9333 9.60012 11.5333 9.93345 11.5333 10.4001C11.5333 10.8001 11.8667 11.2001 12.3333 11.2001C12.8 11.2001 13.2 10.8001 13.1333 10.4001Z"
                         fill="#B27F67" />
                     </svg>
                   </div>
-                  <div class="badge available" data-type="7">
+                  <div class="badge available" data-type="7" data-bs-toggle="tooltip" data-bs-title="Location">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M7.99999 7.99967C8.36666 7.99967 8.68066 7.86901 8.94199 7.60767C9.20288 7.34679 9.33332 7.03301 9.33332 6.66634C9.33332 6.29967 9.20288 5.98567 8.94199 5.72434C8.68066 5.46345 8.36666 5.33301 7.99999 5.33301C7.63332 5.33301 7.31955 5.46345 7.05866 5.72434C6.79732 5.98567 6.66666 6.29967 6.66666 6.66634C6.66666 7.03301 6.79732 7.34679 7.05866 7.60767C7.31955 7.86901 7.63332 7.99967 7.99999 7.99967ZM7.99999 14.6663C6.2111 13.1441 4.8751 11.7301 3.99199 10.4243C3.10843 9.11901 2.66666 7.91079 2.66666 6.79967C2.66666 5.13301 3.20288 3.80523 4.27532 2.81634C5.34732 1.82745 6.58888 1.33301 7.99999 1.33301C9.4111 1.33301 10.6527 1.82745 11.7247 2.81634C12.7971 3.80523 13.3333 5.13301 13.3333 6.79967C13.3333 7.91079 12.8918 9.11901 12.0087 10.4243C11.1251 11.7301 9.78888 13.1441 7.99999 14.6663Z"
                         fill="#B27F67" />
                     </svg>
                   </div>
-                  <div class="badge available" data-type="8">
+                  <div class="badge available" data-type="8" data-bs-toggle="tooltip" data-bs-title="Hotel">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M11.3333 12.6667H12.6667V7.33333H8.66668V12.6667H10V8.66667H11.3333V12.6667ZM2.00001 12.6667V2.66667C2.00001 2.48986 2.07025 2.32029 2.19527 2.19526C2.3203 2.07024 2.48987 2 2.66668 2H12C12.1768 2 12.3464 2.07024 12.4714 2.19526C12.5964 2.32029 12.6667 2.48986 12.6667 2.66667V6H14V12.6667H14.6667V14H1.33334V12.6667H2.00001ZM4.66668 7.33333V8.66667H6.00001V7.33333H4.66668ZM4.66668 10V11.3333H6.00001V10H4.66668ZM4.66668 4.66667V6H6.00001V4.66667H4.66668Z"
@@ -96,30 +98,32 @@
                 </svg>
               </div>
               <div class="search-item">
-                <input type="text" id="dropoff" class="form-control form-control-sm search-input"
-                  placeholder="Drop off" />
+                <label for="dropoff">Dropoff</label>
+                <input type="text" id="dropoff" class="form-control form-control-sm search-input" placeholder="Drop off" />
 
                 <div id="badgesDropoff" class="badges">
                   <button class="btn-destination-remove btn btn-sm btn-light">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M7.10466 8.04701L3.33333 4.27567L4.27599 3.33301L8.04733 7.10434L11.8187 3.33301L12.7613 4.27567L8.99 8.04701L12.7613 11.8183L11.8187 12.761L8.04733 8.98967L4.27599 12.761L3.33333 11.8183L7.10466 8.04701Z" fill="#B27F67"></path>
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M7.10466 8.04701L3.33333 4.27567L4.27599 3.33301L8.04733 7.10434L11.8187 3.33301L12.7613 4.27567L8.99 8.04701L12.7613 11.8183L11.8187 12.761L8.04733 8.98967L4.27599 12.761L3.33333 11.8183L7.10466 8.04701Z"
+                        fill="#B27F67"></path>
                     </svg>
                   </button>
-                  <div class="badge available" data-type="1">
+                  <div class="badge available" data-type="1" data-bs-toggle="tooltip" data-bs-title="Airport">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M10.22 7.36678C9.4332 7.92534 8.89699 8.77035 8.72668 9.72012L7.70001 7.75345L5.10668 10.3335L5.33334 12.0001L4.63334 12.7068L3.45334 10.5801L1.33334 9.40678L2.04001 8.70012L3.69334 8.93345L6.28668 6.33345L1.33334 3.74678L2.27334 2.80678L8.40668 4.22012L11 1.62678C11.0924 1.53326 11.2024 1.459 11.3237 1.40832C11.4451 1.35764 11.5752 1.33154 11.7067 1.33154C11.8381 1.33154 11.9683 1.35764 12.0896 1.40832C12.2109 1.459 12.321 1.53326 12.4133 1.62678C12.8 2.02012 12.8 2.66678 12.4133 3.04012L9.82001 5.63345L10.22 7.36678ZM14.6667 10.3335C14.6667 12.0668 12.3333 14.6668 12.3333 14.6668C12.3333 14.6668 10 12.0668 10 10.3335C10 9.06678 11.0667 8.00012 12.3333 8.00012C13.6 8.00012 14.6667 9.06678 14.6667 10.3335ZM13.1333 10.4001C13.1333 10.0001 12.7333 9.60012 12.3333 9.60012C11.9333 9.60012 11.5333 9.93345 11.5333 10.4001C11.5333 10.8001 11.8667 11.2001 12.3333 11.2001C12.8 11.2001 13.2 10.8001 13.1333 10.4001Z"
                         fill="#B27F67" />
                     </svg>
                   </div>
-                  <div class="badge available" data-type="7">
+                  <div class="badge available" data-type="7" data-bs-toggle="tooltip" data-bs-title="Location">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M7.99999 7.99967C8.36666 7.99967 8.68066 7.86901 8.94199 7.60767C9.20288 7.34679 9.33332 7.03301 9.33332 6.66634C9.33332 6.29967 9.20288 5.98567 8.94199 5.72434C8.68066 5.46345 8.36666 5.33301 7.99999 5.33301C7.63332 5.33301 7.31955 5.46345 7.05866 5.72434C6.79732 5.98567 6.66666 6.29967 6.66666 6.66634C6.66666 7.03301 6.79732 7.34679 7.05866 7.60767C7.31955 7.86901 7.63332 7.99967 7.99999 7.99967ZM7.99999 14.6663C6.2111 13.1441 4.8751 11.7301 3.99199 10.4243C3.10843 9.11901 2.66666 7.91079 2.66666 6.79967C2.66666 5.13301 3.20288 3.80523 4.27532 2.81634C5.34732 1.82745 6.58888 1.33301 7.99999 1.33301C9.4111 1.33301 10.6527 1.82745 11.7247 2.81634C12.7971 3.80523 13.3333 5.13301 13.3333 6.79967C13.3333 7.91079 12.8918 9.11901 12.0087 10.4243C11.1251 11.7301 9.78888 13.1441 7.99999 14.6663Z"
                         fill="#B27F67" />
                     </svg>
                   </div>
-                  <div class="badge available" data-type="8">
+                  <div class="badge available" data-type="8" data-bs-toggle="tooltip" data-bs-title="Hotel">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M11.3333 12.6667H12.6667V7.33333H8.66668V12.6667H10V8.66667H11.3333V12.6667ZM2.00001 12.6667V2.66667C2.00001 2.48986 2.07025 2.32029 2.19527 2.19526C2.3203 2.07024 2.48987 2 2.66668 2H12C12.1768 2 12.3464 2.07024 12.4714 2.19526C12.5964 2.32029 12.6667 2.48986 12.6667 2.66667V6H14V12.6667H14.6667V14H1.33334V12.6667H2.00001ZM4.66668 7.33333V8.66667H6.00001V7.33333H4.66668ZM4.66668 10V11.3333H6.00001V10H4.66668ZM4.66668 4.66667V6H6.00001V4.66667H4.66668Z"
@@ -141,9 +145,10 @@
                 </svg>
               </div>
               <div class="search-item" data-route="outbound">
-                <label for="outbound">Outbound</label>
+                <label for="outbound" data-text-oneway="Pickup date" data-text-roundtrip="Outbound">Pickup date</label>
                 <input type="text" id="outbound" readonly class="form-control form-control-sm search-input"
-                  placeholder="Pickup date" data-placeholder-oneway="Pickup date" data-placeholder-roundtrip="Flight arrival" />
+                  placeholder="Pickup date" data-text-oneway="Pickup date"
+                  data-text-roundtrip="Flight arrival" />
               </div>
               <div class="search-item" data-route="return">
                 <label for="return">Return</label>
@@ -151,14 +156,8 @@
                   placeholder="Flight departure" />
               </div>
 
-              <button class="btn-roundtrip btn btn-sm btn-outline-primary">Add return</button>
-              <button class="btn-oneway btn btn-sm btn-light">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M7.10466 8.04701L3.33333 4.27567L4.27599 3.33301L8.04733 7.10434L11.8187 3.33301L12.7613 4.27567L8.99 8.04701L12.7613 11.8183L11.8187 12.761L8.04733 8.98967L4.27599 12.761L3.33333 11.8183L7.10466 8.04701Z"
-                    fill="#B27F67" />
-                </svg>
-              </button>
+              <button class="btn-roundtrip btn btn-sm btn-outline-primary">Roundtrip</button>
+              <button class="btn-oneway btn btn-sm btn-outline-primary">Oneway</button>
             </div>
 
             <!--Passenger-->
@@ -341,11 +340,10 @@
     </div>
   </div>
 
-  <div id="air"></div>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
+    
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>

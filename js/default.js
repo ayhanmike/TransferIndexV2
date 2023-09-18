@@ -17,8 +17,12 @@ const AvailableDestinationTypes = Object.freeze({
 });
 
 const global = (function () {
+  const init = () => {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+  }
 
-  const isMobile = function () {
+  const isMobile = () => {
     const toMatch = [
       /Android/i,
       /webOS/i,
@@ -35,6 +39,7 @@ const global = (function () {
   }
 
   return {
+    init: init,
     isMobile: isMobile,
   };
 
@@ -123,13 +128,6 @@ const search = (function () {
           });
         });
       });
-
-      _checkBadges();
-    }
-
-    const _checkBadges = function () {
-
-      //alert("check badges / improve setbadges")
     }
 
     const _displayHTML = function (value) {
@@ -190,7 +188,9 @@ const search = (function () {
 
       searchVars.destination[id].value = value;
       input.val(_displayHTML(value).title);
+      if (id == "pickup" && (searchVars.destination[id].value != undefined)) searchVars.destination.dropoff.input.focus();
       _setBadges();
+
     }
 
     const _autoComplete = function (el) {
@@ -227,7 +227,7 @@ const search = (function () {
                 } else {
                   return item.value.t != DestinationTypes.airport
                 }
-              });              
+              });
             }
 
             return data;
@@ -286,6 +286,14 @@ const search = (function () {
 
       _autoComplete(searchVars.destination.pickup.input);
       _autoComplete(searchVars.destination.dropoff.input);
+
+      document.querySelector("#pickup, #dropoff").addEventListener("close", function (event) {
+        if (!event.detail.selection) {
+          if (event.detail.query != _displayHTML(searchVars.destination[$(this).attr("id")]?.value).title) {
+            $(this).val("").blur();
+          }          
+        }
+      });
     }
 
     return {
@@ -357,16 +365,17 @@ const search = (function () {
     const _setRouteType = function (route) {
       searchVars.routeType = route;
       $("[data-route-type]").attr("data-route-type", route);
-      dateVars.$el.outbound.attr("placeholder", dateVars.$el.outbound.data("placeholder-" + route.toLowerCase()));
+      dateVars.$el.outbound.attr("placeholder", dateVars.$el.outbound.data("text-" + route.toLowerCase()));
+      dateVars.$el.outbound.prev("label").text(dateVars.$el.outbound.prev("label").data("text-" + route.toLowerCase()));
 
       destination.setBadges();
     }
 
     const _switchRoute = function () {
       $(".btn-roundtrip").click(function () {
-        if (dateVars.outbound.selectedDates?.length) {
-          dateVars.return.show();
-        }
+        // if (dateVars.outbound.selectedDates?.length) {
+        //   dateVars.return.show();
+        // }
 
         _setRouteType("RoundTrip");
       });
@@ -406,6 +415,19 @@ const search = (function () {
               el.hide();
             }
           }],
+          onRenderCell({ date, cellType }) {
+            // if (cellType === 'day') {
+            //   if (date.toDateString() == dateVars.outbound.selectedDates?.[0].toDateString()) {
+            //     return {
+            //       disabled: true,
+            //       classes: 'selected',
+            //       attrs: {
+            //         title: 'Outbound flight arrival date'
+            //       }
+            //     }
+            //   }
+            // }
+          }
         }
       });
     }
@@ -481,5 +503,6 @@ const search = (function () {
 })();
 
 $(function () {
+  global.init();
   search.init();
 });
