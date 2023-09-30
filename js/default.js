@@ -16,6 +16,15 @@ const AvailableDestinationTypes = Object.freeze({
   }
 });
 
+const GridBreakpoints = Object.freeze({
+  xs: 0,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+  xxl: 1400
+});
+
 const global = (function () {
   const init = () => {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -43,6 +52,54 @@ const global = (function () {
     isMobile: isMobile,
   };
 
+})();
+
+const home = (function () {
+  const init = () => {
+    $("#owlVehicle").owlCarousel({
+      dots: false,
+      responsive: {
+        [GridBreakpoints.xs]: {
+          items: 1,
+          nav: false
+        },
+        [GridBreakpoints.sm]: {
+          items: 2,
+          nav: true
+        },
+        [GridBreakpoints.md]: {
+          items: 3,
+          nav: true
+        },
+        [GridBreakpoints.lg]: {
+          items: 4,
+          nav: true
+        },
+        [GridBreakpoints.xl]: {
+          items: 5,
+          nav: true
+        }
+      },
+      autoplay: true,
+      autoplayTimeout: 3000,
+      autoplayHoverPause: true,
+      nav: true,
+      navText: [
+        `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.75 6.25L5 15L13.75 23.75" stroke="#B6866F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M5 15H25" stroke="#B6866F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>`,
+        `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 15H25" stroke="#B6866F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M16.25 6.25L25 15L16.25 23.75" stroke="#B6866F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>`
+      ]
+    });
+  }
+
+  return {
+    init: init,
+  };
 })();
 
 const search = (function () {
@@ -291,7 +348,7 @@ const search = (function () {
         if (!event.detail.selection) {
           if (event.detail.query != _displayHTML(searchVars.destination[$(this).attr("id")]?.value).title) {
             $(this).val("").blur();
-          }          
+          }
         }
       });
     }
@@ -504,5 +561,6 @@ const search = (function () {
 
 $(function () {
   global.init();
+  home.init();
   search.init();
 });

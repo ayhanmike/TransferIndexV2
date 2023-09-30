@@ -10,11 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <link href="css/scss/bootstrap.css" rel="stylesheet" />
+  <link href="css/owl.carousel.min.css" rel="stylesheet" />
+  <link href="css/owl.theme.default.min.css" rel="stylesheet" />
+
   <link href="css/style.css" rel="stylesheet" />
 </head>
 
 <body>
-  <div class="hero">
+  <section class="hero">
     <header>
       <div>
         <img src="img/logo.svg" height="36" />
@@ -99,7 +102,8 @@
               </div>
               <div class="search-item">
                 <label for="dropoff">Dropoff</label>
-                <input type="text" id="dropoff" class="form-control form-control-sm search-input" placeholder="Drop off" />
+                <input type="text" id="dropoff" class="form-control form-control-sm search-input"
+                  placeholder="Drop off" />
 
                 <div id="badgesDropoff" class="badges">
                   <button class="btn-destination-remove btn btn-sm btn-light">
@@ -147,8 +151,7 @@
               <div class="search-item" data-route="outbound">
                 <label for="outbound" data-text-oneway="Pickup date" data-text-roundtrip="Outbound">Pickup date</label>
                 <input type="text" id="outbound" readonly class="form-control form-control-sm search-input"
-                  placeholder="Pickup date" data-text-oneway="Pickup date"
-                  data-text-roundtrip="Flight arrival" />
+                  placeholder="Pickup date" data-text-oneway="Pickup date" data-text-roundtrip="Flight arrival" />
               </div>
               <div class="search-item" data-route="return">
                 <label for="return">Return</label>
@@ -296,9 +299,9 @@
         <img src="img/airport-transfer-antalya.png" class="hero-image-2" />
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="why">
+  <section class="why">
     <h2 class="why-title">Why choose us?</h2>
     <div class="why-inner">
       <div class="why-item">
@@ -338,17 +341,97 @@
         <p>No delays, <strong>on time</strong> - We'll get you to your destination quickly with licensed vehicles.</p>
       </div>
     </div>
-  </div>
+  </section>
+
+  <section class="vehicles">
+    <div class="header">
+      <h2 class="title">Transfer Vehicle Types</h2>
+    </div>
+    <div id="owlVehicle" class="list owl-carousel">
+      <div class="list-item">
+        <img src="img/vehicles/transfer-shared-bus.png" alt="Transfer Shared Bus" loading="lazy" />
+        <h3 class="name">Transfer Shared Bus</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-private-midibus.png" alt="Transfer Private Midibus" loading="lazy" />
+        <h3 class="name">Transfer </h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-private-minibus-sprinter-crafter.png" alt="Transfer Private Minibus (Sprinter, Crafter etc.)" loading="lazy" />
+        <h3 class="name">Private Minibus (Sprinter, Crafter etc.)</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-automobile-economy.png" alt="Transfer Automobile (Economy)" loading="lazy" />
+        <h3 class="name">Automobile (Economy)</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-midibus-for-disabled.png" alt="Transfer Midibus For Disabled" loading="lazy" />
+        <h3 class="name">Midibus For Disabled</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-vito-vaneo.png" alt="Transfer Vito, Vaneo etc." loading="lazy" />
+        <h3 class="name">Vito, Vaneo etc.</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-luxury.png" alt="Transfer Luxury (Other)" loading="lazy" />
+        <h3 class="name">Luxury (Other)</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-automobile-comfort.png" alt="Transfer Automobile (Comfort)" loading="lazy" />
+        <h3 class="name">Automobile (Comfort)</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-automobile-business.png" alt="Transfer Automobile (Business)" loading="lazy" />
+        <h3 class="name">Automobile (Business)</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-automobile-premium.png" alt="Transfer Automobile (Premium)" loading="lazy" />
+        <h3 class="name">Automobile (Premium)</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-vito-vaneo-vip.png" alt="Transfer Vito, Vaneo etc. (VIP)" loading="lazy" />
+        <h3 class="name">Vito, Vaneo etc. (VIP)</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-private-minibus-sprinter-vip.png" alt="Transfer Private Minibus (Sprinter VIP)" loading="lazy" />
+        <h3 class="name">Private Minibus (Sprinter VIP)</h3>
+      </div>
+      <div class="list-item">
+        <img src="img/vehicles/transfer-shared-speedy.png" alt="Transfer Shared (Speedy)" loading="lazy" />
+        <h3 class="name">Shared (Speedy)</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="about-item">
+      <h2 class="about-title">Transfer Index</h2>
+      <p class="about-text">The smartest way to go from Airport to Hotel and Hotel to Airport. Your smart transfer assistant who choose best price and provide best quality supplier for you in requested destination.</p>
+      <a href="#" class="btn btn-about">Read more</a>
+    </div>
+    <div class="about-item about-box">
+      <h2 class="about-title">Be Our Agency</h2>
+      <p class="about-text">You can register to our agency sales network to get solid and for affordable and for more profitable transfer service in domestic and international destinations.</p>
+      <a href="#" class="btn btn-about">Register now</a>
+    </div>
+    <div class="about-item about-box">
+      <h2 class="about-title">Be Our Partner</h2>
+      <p class="about-text">To get more revenue and less risk with diversed channels, you can register to our enriched with multi national sales channels. We evalute your registration as soon as possible.</p>
+      <a href="#" class="btn btn-about">Register now</a>
+    </div>
+  </section>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
-    
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/air-datepicker.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tarekraafat-autocomplete.js/10.2.7/autoComplete.min.js"></script>
+
+  <script src="js/owl.carousel.min.js"></script>
 
   <script src="js/default.js"></script>
 </body>
