@@ -27,6 +27,14 @@
 
 body {
   font-family: "Quicksand", sans-serif;
+
+  .form-select {
+    border-radius: 999px;
+  }
+
+  .btn {
+    border-radius: 999px;
+  }
 }
 
 header {
@@ -333,7 +341,7 @@ header {
 
       &.img-airports {
         right: 16px;
-        height: 270px;
+        height: 260px;
       }
 
       &.img-cities {
@@ -366,10 +374,10 @@ header {
           font-size: 14px;
           font-weight: 500;
           white-space: nowrap;
-          padding: 4px 24px;
+          padding: 4px 24px 4px 16px;
           border: 1px solid var(--brown-400);
           text-decoration: none;
-          border-radius: 999px;
+          border-radius: 50vh 50vh 50vh 0;
 
           &:hover {
             background: var(--white);
@@ -417,6 +425,101 @@ header {
       width: 100%;
     }
   }
+}
+
+footer {
+  background: var(--brown-900);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+
+  .footer-inner {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+
+    >div {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 24px;
+    }
+  }
+
+  .footer-menu {
+    display: flex;
+    gap: 24px;
+
+    ul {
+      margin: 0;
+      padding: 16px 0;
+      list-style: none;
+
+      li {
+        a {
+          display: block;
+          color: var(--brown-50);
+          text-decoration: none;
+          padding: 8px 24px 8px 16px;
+          border-radius: 50vh 50vh 50vh 0;
+
+          &:hover {
+            background: var(--brown-700);
+          }
+        }
+      }
+    }
+  }
+
+  .footer-contact {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+
+    >div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 32px;
+      border-radius: 16px 16px 16px 0;
+      background: var(--brown-800);
+      color: var(--brown-50);
+      align-items: center;
+
+      &:hover {
+        background: var(--brown-700);
+      }
+
+      img {
+        height: 40px;
+      }
+    }
+  }
+
+  .footer-logos {
+    display: flex;
+    justify-content: flex-end;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 8px;
+    }
+  }
+}
+
+.copyright {
+  background: var(--brown-900);
+  padding: 16px;
+  display: flex;
+  color: var(--brown-300);
+  font-size: 14px;
+  align-self: center;
+  justify-content: center;
 }
 
 .search {
@@ -728,14 +831,6 @@ header {
       //background: linear-gradient(180deg, #b27f67 0%, #98664d 100%);
     }
   }
-}
-
-.form-select {
-  border-radius: 999px;
-}
-
-.btn {
-  border-radius: 999px;
 }
 
 /* Firefox */

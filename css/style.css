@@ -26,6 +26,12 @@
 body {
   font-family: "Quicksand", sans-serif;
 }
+body .form-select {
+  border-radius: 999px;
+}
+body .btn {
+  border-radius: 999px;
+}
 
 header {
   padding: 30px 60px;
@@ -295,7 +301,7 @@ header .header-actions .btn {
 }
 .popular .popular-item .popular-img.img-airports {
   right: 16px;
-  height: 270px;
+  height: 260px;
 }
 .popular .popular-item .popular-img.img-cities {
   bottom: -32px;
@@ -322,10 +328,10 @@ header .header-actions .btn {
   font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
-  padding: 4px 24px;
+  padding: 4px 24px 4px 16px;
   border: 1px solid var(--brown-400);
   text-decoration: none;
-  border-radius: 999px;
+  border-radius: 50vh 50vh 50vh 0;
 }
 .popular .popular-item .popular-list li a:hover {
   background: var(--white);
@@ -361,6 +367,87 @@ header .header-actions .btn {
 .subscribe form .btn {
   border-radius: 0 50vh 50vh 50vh;
   width: 100%;
+}
+
+footer {
+  background: var(--brown-900);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+footer .footer-inner {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+}
+footer .footer-inner > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 24px;
+}
+footer .footer-menu {
+  display: flex;
+  gap: 24px;
+}
+footer .footer-menu ul {
+  margin: 0;
+  padding: 16px 0;
+  list-style: none;
+}
+footer .footer-menu ul li a {
+  display: block;
+  color: var(--brown-50);
+  text-decoration: none;
+  padding: 8px 24px 8px 16px;
+  border-radius: 50vh 50vh 50vh 0;
+}
+footer .footer-menu ul li a:hover {
+  background: var(--brown-700);
+}
+footer .footer-contact {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+}
+footer .footer-contact > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  border-radius: 16px 16px 16px 0;
+  background: var(--brown-800);
+  color: var(--brown-50);
+  align-items: center;
+}
+footer .footer-contact > div:hover {
+  background: var(--brown-700);
+}
+footer .footer-contact > div img {
+  height: 40px;
+}
+footer .footer-logos {
+  display: flex;
+  justify-content: flex-end;
+}
+footer .footer-logos ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 8px;
+}
+
+.copyright {
+  background: var(--brown-900);
+  padding: 16px;
+  display: flex;
+  color: var(--brown-300);
+  font-size: 14px;
+  align-self: center;
+  justify-content: center;
 }
 
 .search {
@@ -627,14 +714,6 @@ header .header-actions .btn {
   height: 48px;
   justify-content: center;
   align-items: center;
-  border-radius: 999px;
-}
-
-.form-select {
-  border-radius: 999px;
-}
-
-.btn {
   border-radius: 999px;
 }
 
