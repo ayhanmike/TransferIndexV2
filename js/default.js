@@ -86,12 +86,12 @@ const home = (function () {
       nav: true,
       navText: [
         `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M13.75 6.25L5 15L13.75 23.75" stroke="#B6866F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M5 15H25" stroke="#B6866F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M13.75 6.25L5 15L13.75 23.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M5 15H25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>`,
         `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 15H25" stroke="#B6866F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M16.25 6.25L25 15L16.25 23.75" stroke="#B6866F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M5 15H25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M16.25 6.25L25 15L16.25 23.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>`
       ]
     });

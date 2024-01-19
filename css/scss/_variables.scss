@@ -7,6 +7,7 @@
 
 // scss-docs-start gray-color-variables
 $white:    #fff !default;
+$gray-50: #FAFBFC !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
@@ -22,6 +23,7 @@ $black:    #000 !default;
 // fusv-disable
 // scss-docs-start gray-colors-map
 $grays: (
+  "50": $gray-50,
   "100": $gray-100,
   "200": $gray-200,
   "300": $gray-300,
@@ -46,8 +48,12 @@ $yellow:  #ffc107 !default;
 $green:   #198754 !default;
 $teal:    #20c997 !default;
 $cyan:    #0dcaf0 !default;
-$brown:   #98664D !default;
-$mandarin: #E65600 !default;
+// $brandPrimary:   #1b1f29 !default; 
+// $brandSecondary: #599cff !default; 
+$brandPrimary:   #98664D !default; 
+$brandSecondary: #E65600 !default; 
+// $brandPrimary:   #4B5056 !default; 
+// $brandSecondary: #F94E41 !default; 
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -66,8 +72,8 @@ $colors: (
   "white":      $white,
   "gray":       $gray-600,
   "gray-dark":  $gray-800,
-  "brown":      $brown,
-  "mandarin":   $mandarin
+  "brandPrimary":      $brandPrimary,
+  "brandSecondary":   $brandSecondary
 ) !default;
 // scss-docs-end colors-map
 
@@ -180,25 +186,27 @@ $cyan-700: shade-color($cyan, 40%) !default;
 $cyan-800: shade-color($cyan, 60%) !default;
 $cyan-900: shade-color($cyan, 80%) !default;
 
-$brown-100: tint-color($brown, 80%) !default;
-$brown-200: tint-color($brown, 60%) !default;
-$brown-300: tint-color($brown, 40%) !default;
-$brown-400: tint-color($brown, 20%) !default;
-$brown-500: $brown !default;
-$brown-600: shade-color($brown, 20%) !default;
-$brown-700: shade-color($brown, 40%) !default;
-$brown-800: shade-color($brown, 60%) !default;
-$brown-900: shade-color($brown, 80%) !default;
+$brandPrimary-50: tint-color($brandPrimary, 90%) !default;
+$brandPrimary-100: tint-color($brandPrimary, 80%) !default;
+$brandPrimary-200: tint-color($brandPrimary, 60%) !default;
+$brandPrimary-300: tint-color($brandPrimary, 40%) !default;
+$brandPrimary-400: tint-color($brandPrimary, 20%) !default;
+$brandPrimary-500: $brandPrimary !default;
+$brandPrimary-600: shade-color($brandPrimary, 20%) !default;
+$brandPrimary-700: shade-color($brandPrimary, 40%) !default;
+$brandPrimary-800: shade-color($brandPrimary, 60%) !default;
+$brandPrimary-900: shade-color($brandPrimary, 80%) !default;
 
-$mandarin-100: tint-color($mandarin, 80%) !default;
-$mandarin-200: tint-color($mandarin, 60%) !default;
-$mandarin-300: tint-color($mandarin, 40%) !default;
-$mandarin-400: tint-color($mandarin, 20%) !default;
-$mandarin-500: $mandarin !default;
-$mandarin-600: shade-color($mandarin, 20%) !default;
-$mandarin-700: shade-color($mandarin, 40%) !default;
-$mandarin-800: shade-color($mandarin, 60%) !default;
-$mandarin-900: shade-color($mandarin, 80%) !default;
+$brandSecondary-50: tint-color($brandSecondary, 90%) !default;
+$brandSecondary-100: tint-color($brandSecondary, 80%) !default;
+$brandSecondary-200: tint-color($brandSecondary, 60%) !default;
+$brandSecondary-300: tint-color($brandSecondary, 40%) !default;
+$brandSecondary-400: tint-color($brandSecondary, 20%) !default;
+$brandSecondary-500: $brandSecondary !default;
+$brandSecondary-600: shade-color($brandSecondary, 20%) !default;
+$brandSecondary-700: shade-color($brandSecondary, 40%) !default;
+$brandSecondary-800: shade-color($brandSecondary, 60%) !default;
+$brandSecondary-900: shade-color($brandSecondary, 80%) !default;
 
 $blues: (
   "blue-100": $blue-100,
@@ -320,34 +328,34 @@ $cyans: (
   "cyan-900": $cyan-900
 ) !default;
 
-$brown: (
-  "brown-100": $brown-100,
-  "brown-200": $brown-200,
-  "brown-300": $brown-300,
-  "brown-400": $brown-400,
-  "brown-500": $brown-500,
-  "brown-600": $brown-600,
-  "brown-700": $brown-700,
-  "brown-800": $brown-800,
-  "brown-900": $brown-900
+$brandPrimary: (
+  "brandPrimary-100": $brandPrimary-100,
+  "brandPrimary-200": $brandPrimary-200,
+  "brandPrimary-300": $brandPrimary-300,
+  "brandPrimary-400": $brandPrimary-400,
+  "brandPrimary-500": $brandPrimary-500,
+  "brandPrimary-600": $brandPrimary-600,
+  "brandPrimary-700": $brandPrimary-700,
+  "brandPrimary-800": $brandPrimary-800,
+  "brandPrimary-900": $brandPrimary-900
 ) !default;
 
-$mandarin: (
-  "mandarin-100": $mandarin-100,
-  "mandarin-200": $mandarin-200,
-  "mandarin-300": $mandarin-300,
-  "mandarin-400": $mandarin-400,
-  "mandarin-500": $mandarin-500,
-  "mandarin-600": $mandarin-600,
-  "mandarin-700": $mandarin-700,
-  "mandarin-800": $mandarin-800,
-  "mandarin-900": $mandarin-900
+$brandSecondary: (
+  "brandSecondary-100": $brandSecondary-100,
+  "brandSecondary-200": $brandSecondary-200,
+  "brandSecondary-300": $brandSecondary-300,
+  "brandSecondary-400": $brandSecondary-400,
+  "brandSecondary-500": $brandSecondary-500,
+  "brandSecondary-600": $brandSecondary-600,
+  "brandSecondary-700": $brandSecondary-700,
+  "brandSecondary-800": $brandSecondary-800,
+  "brandSecondary-900": $brandSecondary-900
 ) !default;
 // fusv-enable
 
 // scss-docs-start theme-color-variables
-$primary:       $brown !default;
-$secondary:     $mandarin !default;
+$primary:       $brandPrimary !default;
+$secondary:     $brandSecondary !default;
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
