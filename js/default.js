@@ -64,8 +64,8 @@ const home = (function () {
           nav: false
         },
         [GridBreakpoints.sm]: {
-          items: 2,
-          nav: true
+          items: 1,
+          nav: false
         },
         [GridBreakpoints.md]: {
           items: 3,
